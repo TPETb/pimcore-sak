@@ -6,7 +6,7 @@
  * Time: 09:11
  */
 
-include(dirname(__FILE__) . "/../../pimcore/cli/startup.php");
+include(dirname(__FILE__) . "/../../../../pimcore/cli/startup.php");
 
 
 // MIGRACJA KOLEKCJI
@@ -20,7 +20,7 @@ $classes_array = array(); // array of existing collections
 foreach($classes as $class)
     $classes_array[ $class->getKey() ] = true;
 
-$files = glob('extra/fieldcollections/*'); // get all file names
+$files = glob(PIMCORE_DOCUMENT_ROOT . '/data/fieldcollections/*'); // get all file names
 
 // tworzenie kolekcji na podstawie plików
 foreach($files as $file){ // iterate files

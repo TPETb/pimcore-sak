@@ -6,7 +6,7 @@
  * Time: 09:11
  * Migruje foldery assetów do pliku
  */
-include(dirname(__FILE__) . "/../../pimcore/cli/startup.php");
+include(dirname(__FILE__) . "/../../../../pimcore/cli/startup.php");
 
 
 function getFolderList(Asset_Folder $rootFolder, &$folderList = array()) {

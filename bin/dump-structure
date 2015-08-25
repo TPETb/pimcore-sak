@@ -2,7 +2,7 @@
 echo "Creating class migrations... "
 mkdir ../../data
 chmod 0777 ../../data
-retval=`php ../src/MigrateCommit.php; echo $?`
+retval=`php ../tpetb/pimcore-sak/src/MigrateCommit.php; echo $?`
 if [ $retval -ne 0 ]; then
         echo "Migration failed.";
         exit $retval;

@@ -8,5 +8,20 @@
         }
     ],
     "require": {},
-    "bin": []
+    "bin": [
+        "bin/dump-structure",
+        "bin/restore-structure",
+        "bin/install-hooks"
+    ],
+    "scripts": {
+        "post-package-install": [
+            "PimcoreSak\\Package::createDataFolders"
+        ],
+        "post-update-install": [
+            "PimcoreSak\\Package::createDataFolders"
+        ]
+    },
+    "autoload": {
+        "psr-4": {"PimcoreSak\\": "src/"}
+    }
 }
