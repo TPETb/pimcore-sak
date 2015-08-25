@@ -1,0 +1,12 @@
+{
+    "name": "tpetb/pimcore-sak",
+    "description": "Fork from DivanteLtd/pimcore-sak with composer support",
+    "authors": [
+        {
+            "name": "Alex aka TPETb Tretyakov",
+            "email": "alextret@gmail.com"
+        }
+    ],
+    "require": {},
+    "bin": []
+}
