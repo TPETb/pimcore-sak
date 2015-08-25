@@ -8,6 +8,16 @@
 
 include(dirname(__FILE__) . "/../../../../pimcore/cli/startup.php");
 
+// todo move to composer's post install scripts
+if (!is_dir(PIMCORE_DOCUMENT_ROOT . '/data')) {
+    mkdir(PIMCORE_DOCUMENT_ROOT . '/data');
+}
+if (!is_dir(PIMCORE_DOCUMENT_ROOT . '/data/classes')) {
+    mkdir(PIMCORE_DOCUMENT_ROOT . '/data/classes');
+}
+if (!is_dir(PIMCORE_DOCUMENT_ROOT . '/data/fieldcollections')) {
+    mkdir(PIMCORE_DOCUMENT_ROOT . '/data/fieldcollections');
+}
 
 // MIGRACJA KOLEKCJI
 
