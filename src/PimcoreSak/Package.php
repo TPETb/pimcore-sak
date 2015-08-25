@@ -13,6 +13,8 @@ class Package
 {
     public static function createDataFolders()
     {
-
+        mkdir('data');
+        mkdir('data/classes');
+        mkdir('data/fieldcollections');
     }
 }

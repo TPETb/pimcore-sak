@@ -60,7 +60,7 @@ $classes_array = array(); // array of existing classes
 foreach($classes as $class)
     $classes_array[ $class->getName() ] = true;
 
-$files = glob('extra/classes/*'); // get all file names
+$files = glob(PIMCORE_DOCUMENT_ROOT . '/data/classes/*'); // get all file names
 
 // tworzenie klas na podstawie plików
 foreach($files as $file){ // iterate files
