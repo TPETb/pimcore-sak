@@ -1,8 +1,9 @@
 #!/bin/sh
 echo "Migrating classess... "
-php vendor/tpetb/pimcore-sak/src/MigrateCheckout.php > $retval
-if [ $retval -ne 0 ]; then
-        echo "Migration failed, try to manually run extra/shell/MigrateCheckout.php\n"
-        exit $retval;
+retval=`php vendor/tpetb/pimcore-sak/src/MigrateCheckout.php`
+if [ $retval ]; then
+        echo "Migration failed. PHP output:"
+        echo $retval;
+        exit 1;
 fi
 echo "Done.\n"
