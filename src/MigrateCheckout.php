@@ -18,6 +18,9 @@ if (!is_dir(PIMCORE_DOCUMENT_ROOT . '/data/classes')) {
 if (!is_dir(PIMCORE_DOCUMENT_ROOT . '/data/fieldcollections')) {
     mkdir(PIMCORE_DOCUMENT_ROOT . '/data/fieldcollections');
 }
+if (!is_dir(PIMCORE_DOCUMENT_ROOT . '/data/objectbricks')) {
+    mkdir(PIMCORE_DOCUMENT_ROOT . '/data/objectbricks');
+}
 
 // MIGRACJA KOLEKCJI
 
@@ -95,4 +98,43 @@ foreach( $classes_array as $classname => $tmp ) {
     $class = Object_Class::getByName($classname);
     $class->delete();
     echo "Delete class: " . $classname . "\n";
+}
+
+
+// Objectbricks migration
+
+$classesList = new Object_Objectbrick_Definition_List();
+$classes = $classesList->load();
+
+$classes_array = array(); // array of existing collections
+
+/** @var Object_Objectbrick_Definition $class */
+foreach($classes as $class)
+    $classes_array[ $class->getKey() ] = true;
+
+$files = glob(PIMCORE_DOCUMENT_ROOT . '/data/objectbricks/*'); // get all file names
+
+// tworzenie kolekcji na podstawie plików
+foreach($files as $file){ // iterate files
+    if(is_file($file)) {
+        $string = file_get_contents($file);
+        $classname = basename($file, ".json");
+        unset( $classes_array[$classname] );
+        try {
+            $class = Object_Objectbrick_Definition::getByKey($classname);
+            Object_Class_Service::importObjectbrickFromJson($class, $string);
+        } catch (Exception $e) {
+            $newClass = new Object_Objectbrick_Definition();
+            $newClass->setKey($classname);
+            Object_Class_Service::importObjectbrickFromJson($newClass, $string);
+        }
+    }
+}
+
+// usuwanie kolekcji
+/** @var Object_Objectbrick_Definition $class */
+foreach( $classes_array as $classname => $tmp ) {
+    $class = Object_Objectbrick_Definition::getByKey($classname);
+    $class->delete();
+    echo "Delete objectbrick: " . $classname . "\n";
 }

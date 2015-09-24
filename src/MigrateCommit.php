@@ -18,6 +18,10 @@ if (!is_dir(PIMCORE_DOCUMENT_ROOT . '/data/classes')) {
 if (!is_dir(PIMCORE_DOCUMENT_ROOT . '/data/fieldcollections')) {
     mkdir(PIMCORE_DOCUMENT_ROOT . '/data/fieldcollections');
 }
+if (!is_dir(PIMCORE_DOCUMENT_ROOT . '/data/objectbricks')) {
+    mkdir(PIMCORE_DOCUMENT_ROOT . '/data/objectbricks');
+}
+
 
 $classesList = new Object_Class_List();
 $classesList->setOrderKey("name");
@@ -56,3 +60,23 @@ foreach($classes as $class) {
     fwrite($handle, $json);
     fclose($handle);
 }
+
+$classesList = new Object_Objectbrick_Definition_List();
+$classes = $classesList->load();
+
+$files = glob(PIMCORE_DOCUMENT_ROOT . '/data/objectbricks/*'); // get all file names
+foreach($files as $file){ // iterate files
+    if(is_file($file))
+        unlink($file); // delete file
+}
+
+/** @var Object_Objectbrick_Definition $class */
+foreach($classes as $class) {
+    $key = $class->getKey();
+    $json = Object_Class_Service::generateObjectbrickJson($class);
+
+    $handle = fopen(PIMCORE_DOCUMENT_ROOT . '/data/objectbricks/'.$key.'.json', 'w');
+    fwrite($handle, $json);
+    fclose($handle);
+}
+
