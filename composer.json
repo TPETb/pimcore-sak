@@ -11,6 +11,8 @@
     "bin": [
         "bin/dump-structure",
         "bin/restore-structure",
+        "bin/dump-routes",
+        "bin/restore-routes",
         "bin/install-hooks"
     ],
     "scripts": {
