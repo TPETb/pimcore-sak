@@ -1,0 +1,9 @@
+#!/bin/sh
+echo "Exporting routes... "
+retval=`php vendor/tpetb/pimcore-sak/src/RoutesExport.php`
+if [ $retval ]; then
+    echo "Routes Export failed. PHP Output:";
+    echo $retval;
+    exit 1
+fi
+echo "Done.\n"

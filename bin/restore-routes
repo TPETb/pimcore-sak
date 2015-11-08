@@ -1,0 +1,9 @@
+#!/bin/sh
+echo "Restoring routes... "
+retval=`php vendor/tpetb/pimcore-sak/src/RoutesImport.php`
+if [ $retval ]; then
+    echo "Routes import failed. PHP Output:";
+    echo $retval;
+    exit 1
+fi
+echo "Done.\n"
