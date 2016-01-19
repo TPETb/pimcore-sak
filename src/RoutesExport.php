@@ -30,6 +30,7 @@ foreach ($routes->load() as $route) {
         'action' => $route->getAction(),
         'variables' => $route->getVariables(),
         'defaults' => $route->getDefaults(),
+        'priority' => $route->getPriority()
     ];
 }
 
